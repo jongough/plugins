@@ -23,6 +23,7 @@ jobs:
       run: |
         pip install pathlib
         python tools/ocpn-metadata generate --userdir metadata --destfile ocpn-plugins.xml --force
+        echo "user.name: $GITHUB_ACTOR"
         git config --local user.name "$GITHUB_ACTOR"
         git add ocpn-plugins.xml
         git commit -m "Updating the repository GitHub ocpn-plugins.xml"
