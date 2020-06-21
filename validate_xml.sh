@@ -37,7 +37,7 @@ else
                 exit_rc=$rc
             fi
         fi
-    done < <( git show --name-only --oneline HEAD )
+    done < <( git diff --name-only)
     if [[ $exit_rc == 0 ]]; then
         echo "All files pass xsd check"
     fi
