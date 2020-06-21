@@ -44,10 +44,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: check xml files
+        env:
+          commit_sha: ${{ github.event.after }}
         run: |
-          echo "All: ${{ steps.more_files.outputs.all }}"
-          env:
-            commit_sha: ${{ github.event.after }}
           ls -l
           bash ./validate_xml.sh
           rc=$?

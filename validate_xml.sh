@@ -27,10 +27,11 @@ if [ -z $CI ] && [ -z $GITHUB_ACTION ]; then
     exit $exit_rc
 else
     exit_rc=0
-    gitdiff="$(`git --no-pager diff --name-only ..HEAD`)"
-    echo "gitdiff: ${gitdiff}"
-    gitdifffiles=`$(git diff-tree --no-commit-id --name-only -r ${commit_sha})`
-    echo "gitdifffiles: ${gitdifffiles}"
+    #gitdiff="$(`git --no-pager diff --name-only ..HEAD`)"
+    #echo "gitdiff: ${gitdiff}"
+    #gitdifffiles=`$(git diff-tree --no-commit-id --name-only -r ${commit_sha})`
+    #echo "gitdifffiles: ${gitdifffiles}"
+    echo "commit_sha: ${commit_sha}"
     while read -r file; do
         if [[ $file == "metadata"*".xml" ]]; then
             echo "Processing file: $file"
