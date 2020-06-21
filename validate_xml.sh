@@ -29,7 +29,7 @@ else
     exit_rc=0
     gitdiff="$(`git --no-pager diff --name-only ..HEAD`)"
     echo "gitdiff: ${gitdiff}"
-    gitdifffiles=`$(git diff-files --name-only)`
+    gitdifffiles=`$(git diff-tree --no-commit-id --name-only -r ${commit_sha})`
     echo "gitdifffiles: ${gitdifffiles}"
     while read -r file; do
         if [[ $file == "metadata"*".xml" ]]; then
@@ -41,7 +41,7 @@ else
                 exit_rc=$rc
             fi
         fi
-    done < <( git diff-tree --no-commit-id --name-only -r $commit_sha)
+    done < <( git diff-tree --no-commit-id --name-only -r ${commit_sha})
     #done < <( git diff --name-only ..master)${{ steps.getfile.outputs.files1 }}
     if [[ $exit_rc == 0 ]]; then
         echo "All files pass git pull xsd check"
