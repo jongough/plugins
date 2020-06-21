@@ -31,7 +31,7 @@ else
     #echo "gitdiff: ${gitdiff}"
     #gitdifffiles=`$(git diff-tree --no-commit-id --name-only -r ${commit_sha})`
     #echo "gitdifffiles: ${gitdifffiles}"
-    echo "commit_sha: ${commit_sha}"
+    echo "commit_sha: ${GITHUB_SHA}"
     while read -r file; do
         if [[ $file == "metadata"*".xml" ]]; then
             echo "Processing file: $file"
@@ -42,7 +42,7 @@ else
                 exit_rc=$rc
             fi
         fi
-    done < <( git diff-tree --no-commit-id --name-only -r ${commit_sha})
+    done < <( git diff-tree --no-commit-id --name-only -r ${GITHUB_SHA})
     #done < <( git diff --name-only ..master)${{ steps.getfile.outputs.files1 }}
     if [[ $exit_rc == 0 ]]; then
         echo "All files pass git pull xsd check"
