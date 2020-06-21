@@ -46,7 +46,8 @@ jobs:
       - name: check xml files
         run: |
           echo "All: ${{ steps.more_files.outputs.all }}"
-          commit_sha=${{ github.event.after }}
+          env:
+            commit_sha: ${{ github.event.after }}
           ls -l
           bash ./validate_xml.sh
           rc=$?
