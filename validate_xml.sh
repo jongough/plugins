@@ -41,7 +41,7 @@ else
                 exit_rc=$rc
             fi
         fi
-    done < <( ${{ steps.getfile.outputs.files1 }} )
+    done < <( git diff-tree --no-commit-id --name-only -r $commit_sha)
     #done < <( git diff --name-only ..master)${{ steps.getfile.outputs.files1 }}
     if [[ $exit_rc == 0 ]]; then
         echo "All files pass git pull xsd check"
