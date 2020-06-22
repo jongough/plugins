@@ -39,9 +39,9 @@ else
     IFS=' ' read -r -a array <<< "$FILES"
     echo "array size: ${arrray[@]}"
     URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${REQUEST_NO}/files"
-    FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
-    echo "Validate Files Num: $FILES[1]}"
-    echo "Files content: ${FILES}"
+    FILES_FOUND=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
+    echo "Validate Files Num: $FILES_FOUND[@]"
+    echo "Files content: $FILES_FOUND"
 
     while read -r file; do
         if [[ $file == "metadata"*".xml" ]]; then
