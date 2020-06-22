@@ -27,8 +27,8 @@ jobs:
       - name: check pr files
         run: |
           URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ github.event.pull_request.number }}/files"
-          FILES[]=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
-          #FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename' | sed "s/ /\n/")
+          #FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
+          FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename' | sed "s/\n/ /")
           echo ${#FILES[@]}
           echo "::set-env name=FILES::${FILES}"
           echo ::set-env name=GITHUB_REPOSITORY::${GITHUB_REPOSITORY}
