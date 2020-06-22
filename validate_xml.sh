@@ -40,7 +40,7 @@ else
     echo "array size: ${arrray[@]}"
     URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${REQUEST_NO}/files"
     FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
-    echo "Validate Files Num: $FILES[@]}"
+    echo "Validate Files Num: $FILES[1]}"
     echo "Files content: ${FILES}"
 
     while read -r file; do
