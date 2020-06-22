@@ -41,7 +41,8 @@ else
     URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${REQUEST_NO}/files"
     FILES_FOUND=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
     echo "Validate Files Num: ${#FILES_FOUND[@]}"
-    echo "Files content: ${FILES_FOUND[1]}"
+    echo "Files content: ${FILES_ARRAY[1]}"
+    echo "File_array: ${FILE_ARRAY[@]}"
 
     while read -r file; do
         if [[ $file == "metadata"*".xml" ]]; then
