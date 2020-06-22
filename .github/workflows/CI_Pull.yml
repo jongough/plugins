@@ -29,7 +29,7 @@ jobs:
           URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ github.event.pull_request.number }}/files"
           FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
           #FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename' | sed "s/ /\n/")
-          echo $FILES
+          echo ${#FILES[@]}
           echo "::set-env name=FILES::${FILES}"
           echo ::set-env name=GITHUB_REPOSITORY::${GITHUB_REPOSITORY}
           echo ::set-env name=REQUEST_NO::${{ github.event.pull_request.number }}
