@@ -40,9 +40,12 @@ else
     echo "array size: ${#arrray[@]}"
     URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${REQUEST_NO}/files"
     FILES_FOUND=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
-    echo "Validate Files Num: ${#FILES_FOUND[@]}"
-    echo "Files content: ${FILES_ARRAY[1]}"
-    echo "File_array: ${FILE_ARRAY[@]}"
+    files_array_val=($FILES_FOUND)
+    echo "Validate Files: $FILES_FOUND"
+    echo "Files content: $FILES_ARRAY[1]"
+    echo "File_array: $#FILE_ARRAY[@]"
+    echo "files_found_array: ${#files_array_val[@]}"
+    echo "files_array_val[1]: $files_array_val[1]"
 
     while read -r file; do
         if [[ $file == "metadata"*".xml" ]]; then
