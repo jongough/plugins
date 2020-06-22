@@ -35,6 +35,7 @@ else
     echo "commit_sha: ${GITHUB_SHA}"
     echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
     echo "REQUEST_NO: ${REQUEST_NO}"
+    echo "FILES no: ${FILES[@]}"
     while read -r file; do
         if [[ $file == "metadata"*".xml" ]]; then
             echo "Processing file: $file"
