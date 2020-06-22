@@ -24,26 +24,14 @@ jobs:
       - name: install_utils
         run: sudo apt install libxml2-utils
 
-      - name: get_changed_files
-        id: getfile
-        run: |
-          echo "::set-output name=files::$(git diff-tree --no-commit-id --name-only -r  ...${{ github.event.after }})"
-          echo "::set-output name=files1::$(git diff-tree --no-commit-id --name-only -r ${{ github.event.before }} ${{ github.event.after }})"
-
-      - name: echo_output
-        run: |
-          echo ${{ steps.getfile.outputs.files }}
-          echo ${{ steps.getfile.outputs.files1 }}
-
       - name: check pr files
         run: |
           URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${{ github.event.pull_request.number }}/files"
           FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
+          #FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename' | sed "s/ /\n/")
           echo $FILES
 
       - name: check xml files
-        env:
-          commit_sha: ${{ github.event.after }}
         run: |
           ls -l
           bash ./validate_xml.sh
