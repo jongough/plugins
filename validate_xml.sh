@@ -32,7 +32,6 @@ else
     files_array=($FILES_FOUND)
     for file in "${files_array[@]}"
     do
-        echo "Found file: $file"
         if [[ $file == "metadata"*".xml" ]]; then
             echo "Processing file: $file"
             `xmllint  --schema ocpn-plugins.xsd $file --noout 2> /dev/null`
@@ -44,18 +43,6 @@ else
         fi
     done
 
-#    while read -r file; do
-#        if [[ $file == "metadata"*".xml" ]]; then
-#            echo "Processing file: $file"
-#            `xmllint  --schema ocpn-plugins.xsd $file --noout 2> /dev/null`
-#            rc=$?
-#            if [ $rc -gt 0 ]; then
-#                `xmllint  --schema ocpn-plugins.xsd $file --noout`
-#                exit_rc=$rc
-#            fi
-#        fi
-#    done < <( $(curl -s -X GET -G $URL | jq -r '.[] | .filename') )
-    #done < <( git diff --name-only ..master)${{ steps.getfile.outputs.files1 }}
     if [[ $exit_rc == 0 ]]; then
         echo "All files pass git pull xsd check"
     fi
