@@ -36,8 +36,12 @@ else
     echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
     echo "REQUEST_NO: ${REQUEST_NO}"
     echo "FILES no: ${#FILES[@]}"
-    IFS='\n' read -r -a array <<< "$FILES"
+    IFS=' ' read -r -a array <<< "$FILES"
     echo "array size: ${arrray[@]}"
+    URL="https://api.github.com/repos/${GITHUB_REPOSITORY}/pulls/${REQUEST_NO}/files"
+    FILES=$(curl -s -X GET -G $URL | jq -r '.[] | .filename')
+    echo "Validate Files Num: $FILES[@]}"
+
     while read -r file; do
         if [[ $file == "metadata"*".xml" ]]; then
             echo "Processing file: $file"
