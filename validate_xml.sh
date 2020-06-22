@@ -36,6 +36,8 @@ else
     echo "GITHUB_REPOSITORY: ${GITHUB_REPOSITORY}"
     echo "REQUEST_NO: ${REQUEST_NO}"
     echo "FILES no: ${#FILES[@]}"
+    IFS='\n' read -r -a array << "$FILES"
+    echo "array size: ${arrray[@]}"
     while read -r file; do
         if [[ $file == "metadata"*".xml" ]]; then
             echo "Processing file: $file"
